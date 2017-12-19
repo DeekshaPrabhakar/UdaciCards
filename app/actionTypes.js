@@ -1,0 +1,1 @@
+export const RECEIVE_DECKS = 'RECEIVE_DECKS'

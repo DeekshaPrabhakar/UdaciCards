@@ -1,16 +1,39 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React from 'react'
+import { StyleSheet, Text, View } from 'react-native'
 import { Foundation } from '@expo/vector-icons'
+import { createStore, applyMiddleware, compose } from 'redux'
+import { Provider } from 'react-redux'
+import thunk from 'redux-thunk'
+import reducer from './app/reducers'
+import DecksView from './Decks/DecksView'
+import { fetchAllDecks } from './Decks/decksAction'
 
 export default class App extends React.Component {
   render() {
+
+    const composeEnhancers = compose
+    const store = createStore(
+      reducer,
+      composeEnhancers(
+          applyMiddleware(thunk)
+      )
+  )
+  
+  store.dispatch(fetchAllDecks())
     return (
-      <View style={styles.container}>
-      <Foundation name='clipboard-notes' size={50}  />
-        <Text>Open up App.js to start working on your app!</Text>
-        <Text>Changes you make will automatically reload.</Text>
-        <Text>Shake your phone to open the developer menu.</Text>
+      // <View style={styles.container}>
+      // <Foundation name='clipboard-notes' size={50}  />
+      //   <Text>Open up App.js to start working on your app!</Text>
+      //   <Text>Changes you make will automatically reload.</Text>
+      //   <Text>Shake your phone to open the developer menu.</Text>
+      // </View>
+      <Provider store={store}>
+      <View style={{flex: 1}}>
+      <DecksView />
+        {/* <UdaciStatusBar backgroundColor={purple} barStyle="light-content" />
+        <MainNavigator /> */}
       </View>
+    </Provider>
     );
   }
 }
