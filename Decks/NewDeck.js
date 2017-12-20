@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { View, Text, StyleSheet, Platform, TouchableOpacity } from 'react-native'
 import { fetchAllDecks } from '../Decks/decksAction'
 import { AppLoading } from 'expo'
-import { bgColor, textColor, deckBgColor } from '../utils/colors'
+import { bgColor, textColor } from '../utils/colors'
 import styled from 'styled-components/native'
 
 const CenterView = styled.View`
@@ -14,16 +14,15 @@ const CenterView = styled.View`
 `
 
 const DeckView = styled.View`
-    border: 1px solid ${textColor};
+    border: 2px solid ${textColor};
     height: 60px;
     margin: 10px;
     justify-content: center;
     align-items: center;
     border-radius: 5px;
-    background: ${deckBgColor};
 `
 
-class DecksView extends Component {
+class NewDeck extends Component {
     state = {
         decks: this.props.decks,
         ready: false
@@ -43,21 +42,9 @@ class DecksView extends Component {
         const decks = this.state.decks ? this.state.decks : []
         const { ready } = this.state
 
-        if (ready === false) {
-            return <AppLoading />
-        }
-
         return (
             <CenterView>
-                {decks.map((deck) => {
-                    const { title, questions } = deck
-                    return (
-                        <DeckView key={title}>
-                            <Text style={{alignItems:'center', fontSize: 22, fontWeight: 'bold', color: textColor}} >{title}</Text>
-                            <Text style={{fontSize: 14, fontWeight: 'bold'}}>{questions.length} cards</Text>
-                        </DeckView>
-                    )
-                })}
+               <Text>New Deck</Text>
             </CenterView>
         );
     }
@@ -68,4 +55,4 @@ function mapStateToProps(state, ownProps) {
     return { decks: decks };
 }
 
-export default connect(mapStateToProps)(DecksView)
+export default connect(mapStateToProps)(NewDeck)
