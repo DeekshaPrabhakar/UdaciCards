@@ -73,7 +73,7 @@ export default class App extends React.Component {
 
     const MainNavigator = StackNavigator({
       Home: {
-        screen: Tabs,
+        screen: Tabs
       },
       DeckDetail: {
         screen: DeckDetail,

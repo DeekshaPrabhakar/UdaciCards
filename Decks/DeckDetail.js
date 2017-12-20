@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { View, Text, StyleSheet, Platform, TouchableOpacity } from 'react-native'
 import { fetchAllDecks } from '../Decks/decksAction'
 import { AppLoading } from 'expo'
-import { bgColor, textColor } from '../utils/colors'
+import { bgColor, textColor, inActiveColor, white, deckBgColor } from '../utils/colors'
 import styled from 'styled-components/native'
 
 const CenterView = styled.View`
@@ -13,14 +13,23 @@ const CenterView = styled.View`
     padding-top: 20px;
 `
 
-const DeckView = styled.View`
-    border: 2px solid ${textColor};
-    height: 60px;
-    margin: 10px;
+
+const DetailButton = styled.TouchableOpacity`
+    border: 1px solid ${inActiveColor};
+    height: 50px;
+    margin: 10px 80px;
     justify-content: center;
     align-items: center;
     border-radius: 5px;
+    background: ${deckBgColor};
 `
+
+const DetailButtonLabel = styled.Text`
+    color: ${white};
+    font-size: 15px;
+    margin: 0px 40px;
+`
+
 
 class DeckDetail extends Component {
     static navigationOptions = ({ navigation }) => {
@@ -34,25 +43,21 @@ class DeckDetail extends Component {
         const { deckTitle } = this.props
         return (
             <CenterView>
-                <TouchableOpacity key='newCard'
+                <DetailButton key='newCard'
                     onPress={() => this.props.navigation.navigate(
                         'NewCard',
                         { deckTitle: deckTitle }
                     )}>
-                    <DeckView>
-                        <Text style={{ alignItems: 'center', fontSize: 22, fontWeight: 'bold', color: textColor }} >Add Card</Text>
-                    </DeckView>
-                </TouchableOpacity>
+                        <DetailButtonLabel>Add Card</DetailButtonLabel>
+                </DetailButton>
 
-                <TouchableOpacity key='quiz'
+                <DetailButton key='quiz'
                     onPress={() => this.props.navigation.navigate(
                         'QuizView',
                         { deckTitle: deckTitle }
                     )}>
-                    <DeckView>
-                        <Text style={{ alignItems: 'center', fontSize: 22, fontWeight: 'bold', color: textColor }} >Start Quiz</Text>
-                    </DeckView>
-                </TouchableOpacity>
+                        <DetailButtonLabel>Start Quiz</DetailButtonLabel>
+                </DetailButton>
             </CenterView>
         );
     }

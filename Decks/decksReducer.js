@@ -1,4 +1,4 @@
-import { RECEIVE_DECKS } from '../app/actionTypes'
+import { RECEIVE_DECKS, ADD_DECK } from '../app/actionTypes'
 
 function decksReducer(state = { decks: [] }, action) {
     const { decks } = action
@@ -9,6 +9,14 @@ function decksReducer(state = { decks: [] }, action) {
             newState = {
                 ...state,
                 "decks": decks
+            }
+            return newState
+        case ADD_DECK:
+        debugger
+            updatedDecks = decks
+            newState = {
+                ...state,
+                "decks": updatedDecks
             }
             return newState
         default:

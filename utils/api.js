@@ -1,16 +1,37 @@
 import { AsyncStorage } from 'react-native'
 
-const UDACICARDS_STORAGE_KEY = 'UdaciCards:Deeksha'
+const UDACICARDS_STORAGE_KEY = 'UdaciCards:Deeks'
 
 export function fetchAllDecks() {
   return AsyncStorage.getItem(UDACICARDS_STORAGE_KEY)
     .then(formatResults)
 }
 
-function formatResults(results) {
-  return results === null
-    ? getDefaultData()
-    : JSON.parse(results)
+export async function addNewDeck(deckName) {
+  try {
+    let decks = await fetchAllDecks()
+    decks[deckName] = { title: deckName, questions: [] };
+    await AsyncStorage.setItem(UDACICARDS_STORAGE_KEY, JSON.stringify(decks));
+    return decks;
+  }
+  catch (error) {
+    console.log(error)
+  }
+
+  return null
+}
+
+async function formatResults(results) {
+  if (results === null) {
+    results = getDefaultData()
+    try {
+      await AsyncStorage.setItem(UDACICARDS_STORAGE_KEY, JSON.stringify(results))
+    }
+    catch (error) {
+      console.log(error)
+    }
+  }
+  return JSON.parse(results)
 }
 
 function getDefaultData() {
