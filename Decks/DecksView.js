@@ -52,10 +52,17 @@ class DecksView extends Component {
                 {decks.map((deck) => {
                     const { title, questions } = deck
                     return (
-                        <DeckView key={title}>
-                            <Text style={{alignItems:'center', fontSize: 22, fontWeight: 'bold', color: textColor}} >{title}</Text>
-                            <Text style={{fontSize: 14, fontWeight: 'bold'}}>{questions.length} cards</Text>
-                        </DeckView>
+                        <TouchableOpacity key={title} 
+                            onPress={() => this.props.navigation.navigate(
+                                'DeckDetail',
+                                { deckTitle: title }
+                            )}
+                        >
+                            <DeckView>
+                                <Text style={{ alignItems: 'center', fontSize: 22, fontWeight: 'bold', color: textColor }} >{title}</Text>
+                                <Text style={{ fontSize: 14, fontWeight: 'bold' }}>{questions.length} cards</Text>
+                            </DeckView>
+                        </TouchableOpacity>
                     )
                 })}
             </CenterView>

@@ -7,6 +7,9 @@ import thunk from 'redux-thunk'
 import reducer from './app/reducers'
 import DecksView from './Decks/DecksView'
 import NewDeck from './Decks/NewDeck'
+import DeckDetail from './Decks/DeckDetail'
+import NewCard from './Cards/NewCard'
+import Quiz from './Cards/Quiz'
 import { fetchAllDecks } from './Decks/decksAction'
 import { bgColor, textColor, inActiveColor } from './utils/colors'
 import { Constants } from 'expo'
@@ -71,6 +74,33 @@ export default class App extends React.Component {
   const MainNavigator = StackNavigator({
     Home: {
       screen: Tabs,
+    },
+    DeckDetail: {
+      screen: DeckDetail,
+      navigationOptions: {
+        headerTintColor: textColor,
+        headerStyle: {
+          backgroundColor: inActiveColor,
+        }
+      }
+    },
+    NewCard: {
+      screen: NewCard,
+      navigationOptions: {
+        headerTintColor: textColor,
+        headerStyle: {
+          backgroundColor: inActiveColor,
+        }
+      }
+    },
+    QuizView: {
+      screen: Quiz,
+      navigationOptions: {
+        headerTintColor: textColor,
+        headerStyle: {
+          backgroundColor: inActiveColor,
+        }
+      }
     }
   })
   
