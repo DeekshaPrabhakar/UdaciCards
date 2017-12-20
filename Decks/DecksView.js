@@ -52,7 +52,7 @@ class DecksView extends Component {
                 {decks.map((deck) => {
                     const { title, questions } = deck
                     return (
-                        <TouchableOpacity key={title} 
+                        <TouchableOpacity key={title}
                             onPress={() => this.props.navigation.navigate(
                                 'DeckDetail',
                                 { deckTitle: title }

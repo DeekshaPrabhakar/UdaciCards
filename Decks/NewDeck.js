@@ -44,7 +44,7 @@ class NewDeck extends Component {
 
         return (
             <CenterView>
-               <Text>New Deck</Text>
+                <Text>New Deck</Text>
             </CenterView>
         );
     }

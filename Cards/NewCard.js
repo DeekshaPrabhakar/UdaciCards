@@ -23,23 +23,23 @@ const DeckView = styled.View`
 `
 
 class NewCard extends Component {
-    
+
     render() {
         const { deckTitle } = this.props
         return (
             <CenterView>
-               <Text>New card to deck {deckTitle}</Text>
+                <Text>New card to deck {deckTitle}</Text>
             </CenterView>
         );
     }
 }
 
-function mapStateToProps (state, { navigation }) {
+function mapStateToProps(state, { navigation }) {
     const { deckTitle } = navigation.state.params
-  
+
     return {
         deckTitle
     }
-  }
+}
 
 export default connect(mapStateToProps)(NewCard)

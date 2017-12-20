@@ -23,47 +23,42 @@ const DeckView = styled.View`
 `
 
 class DeckDetail extends Component {
-    
+
     render() {
         const { deckTitle } = this.props
         return (
             <CenterView>
-               <Text>Deck Detail {deckTitle}</Text>
+                <Text>Deck Detail {deckTitle}</Text>
+                <TouchableOpacity key='newCard'
+                    onPress={() => this.props.navigation.navigate(
+                        'NewCard',
+                        { deckTitle: deckTitle }
+                    )}>
+                    <DeckView>
+                        <Text style={{ alignItems: 'center', fontSize: 22, fontWeight: 'bold', color: textColor }} >Add Card</Text>
+                    </DeckView>
+                </TouchableOpacity>
 
-               <TouchableOpacity key='newCard' 
-                            onPress={() => this.props.navigation.navigate(
-                                'NewCard',
-                                { deckTitle: deckTitle }
-                            )}
-                        >
-                            <DeckView>
-                                <Text style={{ alignItems: 'center', fontSize: 22, fontWeight: 'bold', color: textColor }} >Add Card</Text>
-                            </DeckView>
-                        </TouchableOpacity>
-
-               <TouchableOpacity key='quiz' 
-                            onPress={() => this.props.navigation.navigate(
-                                'QuizView',
-                                { deckTitle: deckTitle }
-                            )}
-                        >
-                            <DeckView>
-                                <Text style={{ alignItems: 'center', fontSize: 22, fontWeight: 'bold', color: textColor }} >Start Quiz</Text>
-                            </DeckView>
-                        </TouchableOpacity>
-
-                       
+                <TouchableOpacity key='quiz'
+                    onPress={() => this.props.navigation.navigate(
+                        'QuizView',
+                        { deckTitle: deckTitle }
+                    )}>
+                    <DeckView>
+                        <Text style={{ alignItems: 'center', fontSize: 22, fontWeight: 'bold', color: textColor }} >Start Quiz</Text>
+                    </DeckView>
+                </TouchableOpacity>
             </CenterView>
         );
     }
 }
 
-function mapStateToProps (state, { navigation }) {
+function mapStateToProps(state, { navigation }) {
     const { deckTitle } = navigation.state.params
-  
+
     return {
         deckTitle
     }
-  }
+}
 
 export default connect(mapStateToProps)(DeckDetail)

@@ -23,23 +23,23 @@ const DeckView = styled.View`
 `
 
 class Quiz extends Component {
-    
+
     render() {
         const { deckTitle } = this.props
         return (
             <CenterView>
-               <Text>Quiz about deck {deckTitle}</Text>
+                <Text>Quiz about deck {deckTitle}</Text>
             </CenterView>
         );
     }
 }
 
-function mapStateToProps (state, { navigation }) {
+function mapStateToProps(state, { navigation }) {
     const { deckTitle } = navigation.state.params
-  
+
     return {
         deckTitle
     }
-  }
+}
 
 export default connect(mapStateToProps)(Quiz)
