@@ -108,7 +108,7 @@ export default class App extends React.Component {
     return (
       <Provider store={store}>
         <View style={{ flex: 1 }}>
-          <UdaciCardsStatusBar backgroundColor={textColor} tintColor={textColor} barStyle="light-content" />
+          <UdaciCardsStatusBar backgroundColor={deckBgColor} tintColor={deckBgColor} barStyle="light-content" />
           <MainNavigator />
         </View>
       </Provider>

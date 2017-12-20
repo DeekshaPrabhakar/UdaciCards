@@ -23,7 +23,11 @@ const DeckView = styled.View`
 `
 
 class Quiz extends Component {
-
+    static navigationOptions = ({ navigation }) => {
+        return {
+            title: 'Quiz'
+        }
+    }
     render() {
         const { deckTitle } = this.props
         return (

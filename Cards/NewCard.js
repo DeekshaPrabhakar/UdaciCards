@@ -23,12 +23,16 @@ const DeckView = styled.View`
 `
 
 class NewCard extends Component {
-
+    static navigationOptions = ({ navigation }) => {
+        return {
+            title: 'Add Card'
+        }
+    }
     render() {
         const { deckTitle } = this.props
         return (
             <CenterView>
-                <Text>New card to deck {deckTitle}</Text>
+                <Text>{deckTitle}</Text>
             </CenterView>
         );
     }

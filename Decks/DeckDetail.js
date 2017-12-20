@@ -23,12 +23,17 @@ const DeckView = styled.View`
 `
 
 class DeckDetail extends Component {
+    static navigationOptions = ({ navigation }) => {
+        const { deckTitle } = navigation.state.params
 
+        return {
+            title: `${deckTitle}`
+        }
+    }
     render() {
         const { deckTitle } = this.props
         return (
             <CenterView>
-                <Text>Deck Detail {deckTitle}</Text>
                 <TouchableOpacity key='newCard'
                     onPress={() => this.props.navigation.navigate(
                         'NewCard',
