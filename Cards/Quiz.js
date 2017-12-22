@@ -24,15 +24,47 @@ const DeckView = styled.View`
 
 class Quiz extends Component {
     static navigationOptions = ({ navigation }) => {
+        const { deckTitle } = navigation.state.params
+
         return {
-            title: 'Quiz'
+            title: `${deckTitle}`
         }
     }
+
+    state = {
+        deck: this.props.deck,
+        deckTitle: this.props.deckTitle,
+        quizQuestionIndex: 0,
+        isQuestion: true,
+        question: '',
+        answer: ''
+    }
+
+    componentDidMount() {
+        const { deck } = this.state
+        if (typeof deck !== undefined && deck.questions !== undefined && deck.questions.length) {
+            let questionObject = deck.questions[this.state.quizQuestionIndex]
+            const { question, answer} = questionObject
+            this.setState({
+                question,
+                answer
+            })
+        }
+    }
+
     render() {
-        const { deckTitle } = this.props
+        const { deckTitle, deck } = this.state
+        const { question, answer } = this.state
+
         return (
             <CenterView>
                 <Text>Quiz about deck {deckTitle}</Text>
+                {this.state.isQuestion && (
+                    <Text>{question}</Text>
+                )}
+                {!this.state.isQuestion && (
+                    <Text>{answer}</Text>
+                )}
             </CenterView>
         );
     }
@@ -40,8 +72,10 @@ class Quiz extends Component {
 
 function mapStateToProps(state, { navigation }) {
     const { deckTitle } = navigation.state.params
+    const decks = state.decksReducer.decks
 
     return {
+        deck: decks[deckTitle],
         deckTitle
     }
 }

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { View, Text, StyleSheet, Platform, TouchableOpacity, TextInput } from 'react-native'
-import { fetchAllDecks } from '../Decks/decksAction'
+import { addNewCard } from '../Decks/decksAction'
 import { AppLoading } from 'expo'
 import { bgColor, textColor, inActiveColor, white, deckBgColor } from '../utils/colors'
 import styled from 'styled-components/native'
@@ -21,6 +21,8 @@ const NewCardView = styled.TextInput`
     align-items: stretch;
     border-radius: 5px;
     font-size: 24px;
+    padding: 10px;
+    color: ${textColor};
 `
 
 const CardLabel = styled.Text`
@@ -47,8 +49,9 @@ const SubmitButtonLabel = styled.Text`
 
 class NewCard extends Component {
     state = {
-        question:'',
-        answer:''
+        question: '',
+        answer: '',
+        deckTitle: this.props.deckTitle
     }
 
     static navigationOptions = ({ navigation }) => {
@@ -56,20 +59,40 @@ class NewCard extends Component {
             title: 'Add Card'
         }
     }
+    submit = () => {
+        const deckTitle = this.state.deckTitle
+
+        const newCard = {
+            question: this.state.question,
+            answer: this.state.answer
+        };
+        this.props.addNewCard(deckTitle, newCard)
+
+        this.setState(() => ({ question: '',  answer: ''}))
+        this.props.navigation.goBack();
+    }
+
     render() {
         const { deckTitle } = this.props
+
         return (
             <CenterView>
-                 <CardLabel>Question</CardLabel>
-                 <NewCardView onChangeText={(text) => this.setState({ question: text })}  />
-                 <CardLabel>Answer</CardLabel>
-                 <NewCardView onChangeText={(text) => this.setState({ answer: text })} />
+                <CardLabel>Question</CardLabel>
+                <NewCardView onChangeText={(text) => this.setState({ question: text })} />
+                <CardLabel>Answer</CardLabel>
+                <NewCardView onChangeText={(text) => this.setState({ answer: text })} />
                 <SubmitButton
                     onPress={this.submit}>
                     <SubmitButtonLabel>SUBMIT</SubmitButtonLabel    >
                 </SubmitButton>
             </CenterView>
         );
+    }
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        addNewCard: (deckName, card) => dispatch(addNewCard(deckName, card))
     }
 }
 
@@ -81,4 +104,4 @@ function mapStateToProps(state, { navigation }) {
     }
 }
 
-export default connect(mapStateToProps)(NewCard)
+export default connect(mapStateToProps, mapDispatchToProps)(NewCard)

@@ -13,7 +13,6 @@ const CenterView = styled.View`
     padding-top: 20px;
 `
 
-
 const DetailButton = styled.TouchableOpacity`
     border: 1px solid ${inActiveColor};
     height: 50px;
@@ -29,7 +28,13 @@ const DetailButtonLabel = styled.Text`
     font-size: 15px;
     margin: 0px 40px;
 `
-
+const CardLabel = styled.Text`
+    color: ${textColor};
+    font-size: 15px;
+    margin: 10px 80px;
+    justify-content: center;
+    align-items: center;
+`
 
 class DeckDetail extends Component {
     static navigationOptions = ({ navigation }) => {
@@ -39,10 +44,16 @@ class DeckDetail extends Component {
             title: `${deckTitle}`
         }
     }
+    state = {
+        deck:this.props.deck,
+        deckTitle: this.props.deckTitle
+    }
     render() {
-        const { deckTitle } = this.props
+        const { deckTitle, deck } = this.props
+        
         return (
             <CenterView>
+                <CardLabel>{typeof deck === "undefined" ? 0 : deck.questions.length} cards</CardLabel>
                 <DetailButton key='newCard'
                     onPress={() => this.props.navigation.navigate(
                         'NewCard',
@@ -65,8 +76,10 @@ class DeckDetail extends Component {
 
 function mapStateToProps(state, { navigation }) {
     const { deckTitle } = navigation.state.params
+    const decks = state.decksReducer.decks
 
     return {
+        deck: decks[deckTitle],
         deckTitle
     }
 }

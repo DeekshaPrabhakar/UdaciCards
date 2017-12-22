@@ -38,12 +38,16 @@ const NewDeckView = styled.TextInput`
     align-items: stretch;
     border-radius: 5px;
     font-size: 24px;
+    padding: 10px;
+    color: ${textColor};
 `
 
 const DeckLabel = styled.Text`
     color: ${textColor};
-    font-size: 15px;
+    font-size: 60px;
     margin: 0px 40px;
+    justify-content: center;
+    align-items: center;
 `
 
 class NewDeck extends Component {
@@ -67,8 +71,6 @@ class NewDeck extends Component {
 
         this.setState(() => ({ newDeckName: '' }))
         this.toDeckDetail(newDeckName)
-
-        // Clear local notification
     }
 
     toDeckDetail = (newDeckName) => {
@@ -83,7 +85,7 @@ class NewDeck extends Component {
 
         return (
             <CenterView>
-                <DeckLabel>Deck Name</DeckLabel>
+                <DeckLabel>What is the title of your new deck?</DeckLabel>
                 <NewDeckView onChangeText={(text) => this.setState({ newDeckName: text })} />
                 <SubmitButton
                     onPress={this.submit}>
