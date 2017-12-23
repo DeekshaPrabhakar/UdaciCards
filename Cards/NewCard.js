@@ -68,7 +68,7 @@ class NewCard extends Component {
         };
         this.props.addNewCard(deckTitle, newCard)
 
-        this.setState(() => ({ question: '',  answer: ''}))
+        this.setState(() => ({ question: '', answer: '' }))
         this.props.navigation.goBack();
     }
 
