@@ -2,81 +2,17 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { View, Text, StyleSheet, Platform, TouchableOpacity, Animated } from 'react-native'
 import { fetchAllDecks } from '../Decks/decksAction'
-import { AppLoading } from 'expo'
-import { bgColor, textColor, inActiveColor, deckBgColor, white } from '../utils/colors'
-import styled from 'styled-components/native'
-
-const CenterView = styled.View`
-    flex: 1;
-    align-items: center;
-    background: ${bgColor};
-    padding-top: 20px;
-`
-
-const CardView = styled.View`
-    border: 1px solid ${textColor};
-    margin: 20px 40px;
-    border-radius: 2px;
-    background: ${deckBgColor};
-    justify-content: flex-start;
-    padding: 10px;
-    height: 300px;
-`
-
-const CardLabel = styled.Text`
-    color: ${textColor};
-    font-size: 15px;
-    margin: 0px 40px;
-`
-
-const QuestionLabel = styled.Text`
-    color: ${textColor};
-    font-size: 25px;
-    margin: 0px 40px;
-`
-
-const AnswerLabel = styled.Text`
-    color: ${white};
-    font-size: 20px;
-    margin: 0px 40px;
-`
-
-const QuizButton = styled.TouchableOpacity`
-    border: 1px solid ${inActiveColor};
-    height: 50px;
-    margin: 10px 80px;
-    justify-content: center;
-    align-items: center;
-    border-radius: 5px;
-    background: ${deckBgColor};
-`
-
-const QuizButtonLabel = styled.Text`
-    color: ${white};
-    font-size: 15px;
-    margin: 0px 40px;
-`
-
-const QuizScoreButton = styled.TouchableOpacity`
-    border: 1px solid ${inActiveColor};
-    height: 50px;
-    background: ${deckBgColor};
-    justify-content: center;
-    align-items: center;
-    margin: 10px 20px;
-    border-radius: 2px;
-`
-
-const QuizScoreView = styled.View`
-    padding: 10px;
-`
+import {
+    CenterView, NewCardLabel,
+    DeckHeadingLabel, CardView, QuestionLabel,
+    AnswerLabel, AppButton, AppButtonLabel, QuizScoreButton
+} from '../utils/appStyles'
 
 class Quiz extends Component {
     static navigationOptions = ({ navigation }) => {
         const { deckTitle } = navigation.state.params
-
         return {
-            title: `${deckTitle} Quiz`
+            title: `Quiz`
         }
     }
 
@@ -91,6 +27,7 @@ class Quiz extends Component {
         scoreCorrect: 0,
         scoreView: false
     }
+
     componentWillMount() {
         this.animatedValue = new Animated.Value(0);
         this.value = 0;
@@ -230,21 +167,21 @@ class Quiz extends Component {
             <CenterView>
                 {this.state.scoreView && (
                     <View>
-                        <CardLabel>Quiz Complete</CardLabel>
-                        <CardLabel>{`You got ${this.state.scoreCorrect} of ${this.state.noOfQuestions} questions correct`}</CardLabel>
-                        <QuizScoreView style={{ flex: 1, flexDirection: 'row' }}>
-                            <QuizScoreButton onPress={() => this.restartQuiz()}>
-                                <QuizButtonLabel>Start Again</QuizButtonLabel>
+                        <DeckHeadingLabel>Quiz Complete</DeckHeadingLabel>
+                        <NewCardLabel>{`You got ${this.state.scoreCorrect} of ${this.state.noOfQuestions} questions correct`}</NewCardLabel>
+                        <View style={{ flex: 1, flexDirection: 'row', marginTop: 20 }}>
+                            <QuizScoreButton style={{ marginRight: 0 }} onPress={() => this.restartQuiz()}>
+                                <AppButtonLabel>Start Again</AppButtonLabel>
                             </QuizScoreButton>
                             <QuizScoreButton onPress={() => this.goToDeck()}>
-                                <QuizButtonLabel>Go to deck</QuizButtonLabel>
+                                <AppButtonLabel>Go to deck</AppButtonLabel>
                             </QuizScoreButton>
-                        </QuizScoreView>
+                        </View>
                     </View>
                 )}
                 {!this.state.scoreView && (
                     <View>
-                        <CardLabel>{`${this.state.quizQuestionIndex + 1} of ${this.state.noOfQuestions}`}</CardLabel>
+                        <NewCardLabel>{`${this.state.quizQuestionIndex + 1} of ${this.state.noOfQuestions}`}</NewCardLabel>
                         <CardView>
                             <Animated.View style={[styles.flipCard, frontAnimatedStyle]}>
                                 <QuestionLabel>{question}</QuestionLabel>
@@ -253,22 +190,22 @@ class Quiz extends Component {
                                 <AnswerLabel>{answer}</AnswerLabel>
                             </Animated.View>
                         </CardView>
-                        <QuizButton onPress={() => this.toggleQuestionAnswer()}>
+                        <AppButton onPress={() => this.toggleQuestionAnswer()}>
                             {this.state.isQuestion && (
-                                <QuizButtonLabel>Show Answer</QuizButtonLabel>
+                                <AppButtonLabel>Show Answer</AppButtonLabel>
                             )}
                             {!this.state.isQuestion && (
-                                <QuizButtonLabel>Show Question</QuizButtonLabel>
+                                <AppButtonLabel>Show Question</AppButtonLabel>
                             )}
-                        </QuizButton>
-                        <QuizScoreView style={{ flex: 1, flexDirection: 'row' }}>
+                        </AppButton>
+                        <View style={{ flex: 1, flexDirection: 'row' }}>
                             <QuizScoreButton onPress={() => this.scoreQuestion(true)}>
-                                <QuizButtonLabel>Correct</QuizButtonLabel>
+                                <AppButtonLabel>Correct</AppButtonLabel>
                             </QuizScoreButton>
                             <QuizScoreButton onPress={() => this.scoreQuestion(false)}>
-                                <QuizButtonLabel>Incorrect</QuizButtonLabel>
+                                <AppButtonLabel>Incorrect</AppButtonLabel>
                             </QuizScoreButton>
-                        </QuizScoreView>
+                        </View>
                     </View>
                 )}
             </CenterView>

@@ -3,52 +3,7 @@ import { connect } from 'react-redux'
 import { View, Text, StyleSheet, Platform, TouchableOpacity, TextInput } from 'react-native'
 import { addNewDeck } from '../Decks/decksAction'
 import { AppLoading } from 'expo'
-import { bgColor, textColor, inActiveColor, white, deckBgColor } from '../utils/colors'
-import styled from 'styled-components/native'
-
-const CenterView = styled.View`
-    flex: 1;
-    align-items: stretch;
-    background: ${bgColor};
-    padding-top: 20px;
-    justify-content: center;
-`
-
-const SubmitButton = styled.TouchableOpacity`
-    border: 1px solid ${inActiveColor};
-    height: 50px;
-    margin: 10px 80px;
-    justify-content: center;
-    align-items: center;
-    border-radius: 5px;
-    background: ${deckBgColor};
-`
-
-const SubmitButtonLabel = styled.Text`
-    color: ${white};
-    font-size: 15px;
-    margin: 0px 40px;
-`
-
-const NewDeckView = styled.TextInput`
-    border: 1px solid ${textColor};
-    height: 50px;
-    margin: 10px 40px;
-    justify-content: center;
-    align-items: stretch;
-    border-radius: 5px;
-    font-size: 24px;
-    padding: 10px;
-    color: ${textColor};
-`
-
-const DeckLabel = styled.Text`
-    color: ${textColor};
-    font-size: 60px;
-    margin: 0px 40px;
-    justify-content: center;
-    align-items: center;
-`
+import { CenterView, AppButton, AppButtonLabel, NewDeckCardView, NewDeckLabel } from '../utils/appStyles'
 
 class NewDeck extends Component {
     state = {
@@ -85,12 +40,12 @@ class NewDeck extends Component {
 
         return (
             <CenterView>
-                <DeckLabel>What is the title of your new deck?</DeckLabel>
-                <NewDeckView onChangeText={(text) => this.setState({ newDeckName: text })} />
-                <SubmitButton
+                <NewDeckLabel>What is the title of your new deck?</NewDeckLabel>
+                <NewDeckCardView onChangeText={(text) => this.setState({ newDeckName: text })} />
+                <AppButton
                     onPress={this.submit}>
-                    <SubmitButtonLabel>SUBMIT</SubmitButtonLabel>
-                </SubmitButton>
+                    <AppButtonLabel>SUBMIT</AppButtonLabel>
+                </AppButton>
             </CenterView>
         );
     }
