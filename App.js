@@ -15,10 +15,15 @@ import { bgColor, textColor, inActiveColor, deckBgColor } from './utils/colors'
 import { Constants } from 'expo'
 import { TabNavigator, StackNavigator } from 'react-navigation'
 import { FontAwesome, Ionicons } from '@expo/vector-icons'
+import { setLocalNotification } from './utils/helpers'
 
 export default class App extends React.Component {
-  render() {
 
+  componentDidMount() {
+    setLocalNotification()
+  }
+
+  render() {
     const composeEnhancers = compose
     const store = createStore(
       reducer,

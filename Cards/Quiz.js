@@ -7,6 +7,7 @@ import {
     DeckHeadingLabel, CardView, QuestionLabel,
     AnswerLabel, AppButton, AppButtonLabel, QuizScoreButton
 } from '../utils/appStyles'
+import { clearLocalNotification, setLocalNotification } from '../utils/helpers'
 
 class Quiz extends Component {
     static navigationOptions = ({ navigation }) => {
@@ -104,6 +105,8 @@ class Quiz extends Component {
                 scoreCorrect: score,
                 scoreView: true
             })
+
+            clearLocalNotification().then(setLocalNotification)
         }
     }
 
