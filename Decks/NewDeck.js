@@ -3,15 +3,14 @@ import { connect } from 'react-redux'
 import { View, Text, StyleSheet, Platform, TouchableOpacity, TextInput } from 'react-native'
 import { addNewDeck } from '../Decks/decksAction'
 import { AppLoading } from 'expo'
-import { CenterView, AppButton, AppButtonLabel, NewDeckCardView, NewDeckLabel } from '../utils/appStyles'
+import { CenterView, AppButton, AppButtonLabel, NewDeckCardView, NewDeckLabel, ErrorNewDeckLabel, DisabledAppButton } from '../utils/appStyles'
 import { NavigationActions } from 'react-navigation'
 
-  
+
 class NewDeck extends Component {
     state = {
         decks: this.props.decks,
-        newDeckName: '',
-        deckDuplicate: false
+        newDeckName: ''
     }
 
     componentWillReceiveProps(nextProps) {
@@ -23,7 +22,7 @@ class NewDeck extends Component {
         }
     }
 
-    validateDeck(deckName){
+    validateDeck(deckName) {
         this.setState({ newDeckName: deckName })
     }
 
@@ -35,32 +34,46 @@ class NewDeck extends Component {
     }
 
     toDeckDetail = (newDeckName) => {
-        this.setState(() => ({ 
-            newDeckName: '',
-            deckDuplicate: false
+        this.setState(() => ({
+            newDeckName: ''
         }))
 
         const resetAction = NavigationActions.reset({
             index: 1,
             actions: [
-              NavigationActions.navigate({ routeName: 'Home'}),
-              NavigationActions.navigate({ routeName: 'DeckDetail',  params: {deckTitle: newDeckName}})
+                NavigationActions.navigate({ routeName: 'Home' }),
+                NavigationActions.navigate({ routeName: 'DeckDetail', params: { deckTitle: newDeckName } })
             ]
-          })
+        })
         this.props.navigation.dispatch(resetAction)
     }
 
     render() {
-        const decks = this.state.decks ? this.state.decks : []
+        const decks = this.state.decks ? this.state.decks : {}
+        let isDuplicate = false
+        if (typeof decks !== undefined) {
+            let duplicateDeck = decks[this.state.newDeckName]
+            isDuplicate = duplicateDeck === undefined ? false : true
+        }
 
         return (
             <CenterView>
                 <NewDeckLabel>What is the title of your new deck?</NewDeckLabel>
                 <NewDeckCardView value={this.state.newDeckName} onChangeText={(text) => this.validateDeck(text)} />
-                <AppButton
-                    onPress={this.submit}>
-                    <AppButtonLabel>SUBMIT</AppButtonLabel>
-                </AppButton>
+                {isDuplicate && (
+                    <View>
+                        <ErrorNewDeckLabel>
+                            Deck with this name already exists. Please use another name.
+                      </ErrorNewDeckLabel>
+                        <DisabledAppButton disabled={isDuplicate}><AppButtonLabel>SUBMIT</AppButtonLabel></DisabledAppButton>
+                    </View>
+                )}
+                {!isDuplicate && (
+                    <AppButton
+                        onPress={this.submit}>
+                        <AppButtonLabel>SUBMIT</AppButtonLabel>
+                    </AppButton>
+                )}
             </CenterView>
         );
     }

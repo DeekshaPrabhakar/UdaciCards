@@ -38,6 +38,22 @@ export const NewCardLabel = styled.Text`
     margin: 0px 40px;
 `
 
+export const ErrorNewDeckLabel = styled.Text`
+    color: ${textColor};
+    font-size: 15px;
+    margin: 0px 40px;
+`
+
+export const DisabledAppButton = styled.TouchableOpacity`
+    border: 1px solid ${inActiveColor};
+    height: 50px;
+    margin: 10px 80px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    background: ${deckBgColor};
+`
+
 export const DeckLabel = styled.Text`
     color: ${textColor};
     font-size: 20px;
@@ -60,7 +76,7 @@ export const AppButton = styled.TouchableOpacity`
     justify-content: center;
     align-items: center;
     border-radius: 5px;
-    background: ${deckBgColor};
+    background: ${inActiveColor};
 `
 
 export const AppButtonLabel = styled.Text`
@@ -106,7 +122,7 @@ export const AnswerLabel = styled.Text`
 export const QuizScoreButton = styled.TouchableOpacity`
     border: 1px solid ${inActiveColor};
     height: 50px;
-    background: ${deckBgColor};
+    background: ${inActiveColor};
     justify-content: center;
     align-items: center;
     margin: 10px 20px;
