@@ -33,8 +33,8 @@ class DecksView extends Component {
         return (
             <CenterView>
                 <FlatList data={decks} renderItem={({ item }) =>
-                    <Deck key={item.title} deck={item} navigation={this.props.navigation} />
-                } />
+                    <Deck deck={item} navigation={this.props.navigation} />
+                } keyExtractor={(item, index) => index} />
             </CenterView>
         );
     }

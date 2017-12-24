@@ -1,5 +1,5 @@
 import styled from 'styled-components/native'
-import { bgColor, textColor, inActiveColor, white, deckBgColor } from '../utils/colors'
+import { bgColor, textColor, inActiveColor, white, deckBgColor, disabledColor } from '../utils/colors'
 
 export const CenterView = styled.View`
     flex: 1;
@@ -40,18 +40,18 @@ export const NewCardLabel = styled.Text`
 
 export const ErrorNewDeckLabel = styled.Text`
     color: ${textColor};
-    font-size: 15px;
+    font-size: 13px;
     margin: 0px 40px;
 `
 
 export const DisabledAppButton = styled.TouchableOpacity`
-    border: 1px solid ${inActiveColor};
+    border: 1px solid ${disabledColor};
     height: 50px;
     margin: 10px 80px;
     justify-content: center;
     align-items: center;
     border-radius: 5px;
-    background: ${deckBgColor};
+    background: ${disabledColor};
 `
 
 export const DeckLabel = styled.Text`
@@ -63,7 +63,7 @@ export const DeckLabel = styled.Text`
 
 export const NewDeckLabel = styled.Text`
     color: ${textColor};
-    font-size: 60px;
+    font-size: 40px;
     margin: 0px 40px;
     justify-content: center;
     align-items: center;
@@ -76,7 +76,7 @@ export const AppButton = styled.TouchableOpacity`
     justify-content: center;
     align-items: center;
     border-radius: 5px;
-    background: ${inActiveColor};
+    background: ${deckBgColor};
 `
 
 export const AppButtonLabel = styled.Text`

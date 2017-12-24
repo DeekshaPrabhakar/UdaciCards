@@ -1,6 +1,6 @@
 import { AsyncStorage } from 'react-native'
 import { getDefaultData } from '../utils/helpers'
-const UDACICARDS_STORAGE_KEY = 'UdaciCards:Deeksha'
+const UDACICARDS_STORAGE_KEY = 'UdaciCards:DeekshaPrabh'
 
 export function fetchAllDecks() {
   return AsyncStorage.getItem(UDACICARDS_STORAGE_KEY)
@@ -40,11 +40,11 @@ async function formatResults(results) {
     results = getDefaultData()
     try {
       await AsyncStorage.setItem(UDACICARDS_STORAGE_KEY, JSON.stringify(results))
+      return results
     }
     catch (error) {
       console.log(error)
     }
   }
-  
   return JSON.parse(results)
 }
