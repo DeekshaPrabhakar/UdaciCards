@@ -5,7 +5,7 @@ Is a mobile application (iOS) that allows users to study collections of flashcar
 The app will allow users to create different categories of flashcards called "decks", add flashcards to those decks, then take quizzes on those decks..
 
 ## Walkthrough
-
+![App walkthrough](https://github.com/DeekshaPrabhakar/UdaciCards/blob/master/walkthrough.gif)
 
 ## Project Specifications
 
@@ -56,17 +56,12 @@ The app will allow users to create different categories of flashcards called "de
 
 ## Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app). You can find more information on how to perform common tasks [here](https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md).
+This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app). 
+
+You can find more information on how to perform common tasks [here](https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md).
 
 ### Acknowledgements:
-<ol>
-  <li>
-This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).You can find the most recent version of this guide [here](https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md).
-  </li>
-  <li>
- Flip Card Animation from [here](https://codedaily.io/screencasts/12/Create-a-Flip-Card-Animation-with-React-Native)
-  </li>
-  <li>
-    Themes from <a href="https://color.adobe.com">Adobe.</a>
-  </li>
-  </ol>
+- This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
+- You can find the most recent version of this guide [here](https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md).
+- [Flip Card Animation](https://codedaily.io/screencasts/12/Create-a-Flip-Card-Animation-with-React-Native)
+- Themes from [Adobe](https://color.adobe.com).
