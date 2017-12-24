@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { View, Text, StyleSheet, Platform, TouchableOpacity } from 'react-native'
+import { View, Text, StyleSheet, Platform, TouchableOpacity, FlatList } from 'react-native'
 import { fetchAllDecks } from '../Decks/decksAction'
 import { AppLoading } from 'expo'
 import { CenterView, DeckView, CardLabel, DeckLabel } from '../utils/appStyles'
+import Deck from './Deck'
 
 class DecksView extends Component {
     state = {
@@ -31,22 +32,9 @@ class DecksView extends Component {
 
         return (
             <CenterView>
-                {decks.map((deck) => {
-                    const { title, questions } = deck
-                    return (
-                        <TouchableOpacity key={title}
-                            onPress={() => this.props.navigation.navigate(
-                                'DeckDetail',
-                                { deckTitle: title }
-                            )}
-                        >
-                            <DeckView>
-                                <DeckLabel>{title}</DeckLabel>
-                                <CardLabel>{questions.length} cards</CardLabel>
-                            </DeckView>
-                        </TouchableOpacity>
-                    )
-                })}
+                <FlatList data={decks} renderItem={({ item }) =>
+                    <Deck key={item.title} deck={item} navigation={this.props.navigation} />
+                } />
             </CenterView>
         );
     }

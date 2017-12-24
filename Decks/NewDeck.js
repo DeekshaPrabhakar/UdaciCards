@@ -6,14 +6,12 @@ import { AppLoading } from 'expo'
 import { CenterView, AppButton, AppButtonLabel, NewDeckCardView, NewDeckLabel } from '../utils/appStyles'
 import { NavigationActions } from 'react-navigation'
 
-
-
-
   
 class NewDeck extends Component {
     state = {
         decks: this.props.decks,
-        newDeckName: ''
+        newDeckName: '',
+        deckDuplicate: false
     }
 
     componentWillReceiveProps(nextProps) {
@@ -25,6 +23,10 @@ class NewDeck extends Component {
         }
     }
 
+    validateDeck(deckName){
+        this.setState({ newDeckName: deckName })
+    }
+
     submit = () => {
         const newDeckName = this.state.newDeckName
         this.props.addNewDeck(newDeckName)
@@ -33,7 +35,11 @@ class NewDeck extends Component {
     }
 
     toDeckDetail = (newDeckName) => {
-        this.setState(() => ({ newDeckName: '' }))
+        this.setState(() => ({ 
+            newDeckName: '',
+            deckDuplicate: false
+        }))
+
         const resetAction = NavigationActions.reset({
             index: 1,
             actions: [
@@ -50,7 +56,7 @@ class NewDeck extends Component {
         return (
             <CenterView>
                 <NewDeckLabel>What is the title of your new deck?</NewDeckLabel>
-                <NewDeckCardView value={this.state.newDeckName} onChangeText={(text) => this.setState({ newDeckName: text })} />
+                <NewDeckCardView value={this.state.newDeckName} onChangeText={(text) => this.validateDeck(text)} />
                 <AppButton
                     onPress={this.submit}>
                     <AppButtonLabel>SUBMIT</AppButtonLabel>
