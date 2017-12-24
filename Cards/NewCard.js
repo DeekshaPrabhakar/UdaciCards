@@ -36,9 +36,9 @@ class NewCard extends Component {
         return (
             <CenterView>
                 <NewCardLabel>Question</NewCardLabel>
-                <NewDeckCardView onChangeText={(text) => this.setState({ question: text })} />
+                <NewDeckCardView style={{height: 60, fontSize: 15}} multiline={true} numberOfLines={3} onChangeText={(text) => this.setState({ question: text })} />
                 <NewCardLabel>Answer</NewCardLabel>
-                <NewDeckCardView onChangeText={(text) => this.setState({ answer: text })} />
+                <NewDeckCardView style={{height: 60, fontSize: 15}} multiline={true} numberOfLines={3} onChangeText={(text) => this.setState({ answer: text })} />
                 <AppButton
                     onPress={this.submit}>
                     <AppButtonLabel>SUBMIT</AppButtonLabel>

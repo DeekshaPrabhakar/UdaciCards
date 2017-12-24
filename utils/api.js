@@ -1,6 +1,6 @@
 import { AsyncStorage } from 'react-native'
 import { getDefaultData } from '../utils/helpers'
-const UDACICARDS_STORAGE_KEY = 'UdaciCards:DeekshaPrabh'
+const UDACICARDS_STORAGE_KEY = 'UdaciCards:DeekshaPrabha'
 
 export function fetchAllDecks() {
   return AsyncStorage.getItem(UDACICARDS_STORAGE_KEY)

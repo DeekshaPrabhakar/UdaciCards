@@ -74,9 +74,9 @@ class Quiz extends Component {
         if (isCorrect) {
             score += 1;
         }
-        else {
-            score -= 1;
-        }
+        this.setState({
+            scoreCorrect: score
+        })
         if (quizQuestionIndex < deck.questions.length) {
             let questionObject = deck.questions[quizQuestionIndex]
             const { question, answer } = questionObject
@@ -92,8 +92,7 @@ class Quiz extends Component {
                 question,
                 answer,
                 quizQuestionIndex,
-                isQuestion: true,
-                scoreCorrect: score
+                isQuestion: true
             })
         }
         else {
@@ -102,7 +101,6 @@ class Quiz extends Component {
                 answer: '',
                 quizQuestionIndex: 0,
                 isQuestion: true,
-                scoreCorrect: score,
                 scoreView: true
             })
 
@@ -146,14 +144,18 @@ class Quiz extends Component {
             this.setState({
                 question,
                 answer,
-                noOfQuestions: deck.questions.length
+                noOfQuestions: deck.questions.length,
+                quizQuestionIndex: 0,
+                isQuestion: true,
+                scoreCorrect: 0,
+                scoreView: false
             })
         }
     }
 
     render() {
         const { deckTitle, deck } = this.state
-        const { question, answer } = this.state
+        const { question, answer, noOfQuestions } = this.state
 
         const frontAnimatedStyle = {
             transform: [
@@ -166,12 +168,19 @@ class Quiz extends Component {
             ]
         }
 
+        const score = this.state.scoreCorrect
+        let scoreLabel = `You got ${score} of ${noOfQuestions} questions correct`
+        if(score < 0){
+            const correctedScore = noOfQuestions + score
+            scoreLabel = `You got ${correctedScore} of ${noOfQuestions} questions correct`
+        }
+
         return (
             <CenterView>
                 {this.state.scoreView && (
                     <View>
                         <DeckHeadingLabel>Quiz Complete</DeckHeadingLabel>
-                        <NewCardLabel>{`You got ${this.state.scoreCorrect} of ${this.state.noOfQuestions} questions correct`}</NewCardLabel>
+                        <NewCardLabel>{scoreLabel}</NewCardLabel>
                         <View style={{ flex: 1, flexDirection: 'row', marginTop: 20 }}>
                             <QuizScoreButton style={{ marginRight: 0 }} onPress={() => this.restartQuiz()}>
                                 <AppButtonLabel>Start Again</AppButtonLabel>
